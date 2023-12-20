@@ -30,3 +30,6 @@
 /NCLCoreClasses.dir/Release/*.txt
 /*.vcxproj
 /*.filters
+/.idea
+/cmake-build-debug*
+CMakeFiles

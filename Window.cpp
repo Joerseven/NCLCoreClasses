@@ -1,8 +1,15 @@
 #include "Window.h"
 
+
+#ifdef USEGLFW
+#include "GlfwWindow.h"
+#else
 #ifdef _WIN32
 #include "Win32Window.h"
 #endif
+#endif
+
+
 
 #ifdef __ORBIS__
 #include "../Plugins/PlayStation4/PS4Window.h"
@@ -34,11 +41,15 @@ Window* Window::CreateGameWindow(std::string title, int sizeX, int sizeY, bool f
 	if (window) {
 		return nullptr;
 	}
+#ifdef USEGLFW
+    return new GlfwWindow(title, sizeX, sizeY, fullScreen, offsetX, offsetY);
+#else
 #ifdef _WIN32
 	return new Win32Code::Win32Window(title, sizeX, sizeY, fullScreen, offsetX, offsetY);
 #endif
 #ifdef __ORBIS__
 	return new PS4::PS4Window(title, sizeX, sizeY, fullScreen, offsetX, offsetY);
+#endif
 #endif
 }
 

@@ -1,4 +1,6 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.25)
 set(PROJECT_NAME NCLCoreClasses)
+project(${PROJECT_NAME})
 
 ################################################################################
 # Source groups
@@ -17,6 +19,7 @@ source_group("Asset Handling" FILES ${Asset_Handling})
 
 set(Header_Files
     "Camera.h"
+	"headers.h"
 )
 source_group("Header Files" FILES ${Header_Files})
 
@@ -74,6 +77,8 @@ set(Windowing_and_Input
     "Controller.h"
 	"KeyboardMouseController.cpp"
     "KeyboardMouseController.h"
+	"glad/gl.h"
+	"glad/gl.c"
 )
 source_group("Windowing and Input" FILES ${Windowing_and_Input})
 
@@ -95,42 +100,64 @@ set(ALL_FILES
     ${Source_Files}
     ${Windowing_and_Input}
     ${Windowing_and_Input__Win32}
-)
+		GlfwWindow.cpp GlfwWindow.h main.cpp SimpleOGLRenderer.cpp SimpleOGLRenderer.h)
 
+# GLFW
+
+add_subdirectory(glfw)
 ################################################################################
 # Target
 ################################################################################
-add_library(${PROJECT_NAME} STATIC ${ALL_FILES})
+add_executable(${PROJECT_NAME} ${ALL_FILES})
+
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_SOURCE_DIR})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
     INTERPROCEDURAL_OPTIMIZATION_RELEASE "TRUE"
 )
-target_precompile_headers(${PROJECT_NAME} PRIVATE
-    <memory>
-    <unordered_set>
-    <vector>
-    <string>
-    <fstream>
-    <sstream>
-    <iostream>
-    <string>
-    <iosfwd>
-    <set>
-    <map> 
-    <chrono>
-    <thread>
-    <filesystem>
-    <functional>
-	<algorithm>
-	<assert.h>  
-)
+
+target_include_directories(${PROJECT_NAME} PUBLIC glfw)
+
+
+set(ASSET_ROOT "${CMAKE_SOURCE_DIR}/Assets/" CACHE STRING "" FORCE)
+add_compile_definitions(ASSETROOTLOCATION="${ASSET_ROOT}")
+OPTION(USE_GLFW ON)
+
+if (USE_GLFW)
+	add_compile_definitions(USEGLFW=USE_GLFW)
+endif()
+
+
+target_link_libraries(${PROJECT_NAME} PUBLIC glfw)
 
 ################################################################################
 # Compile and link options
 ################################################################################
 if(MSVC)
+
+	target_precompile_headers(${PROJECT_NAME} PRIVATE
+			<memory>
+			<unordered_set>
+			<vector>
+			<string>
+			<fstream>
+			<sstream>
+			<iostream>
+			<string>
+			<iosfwd>
+			<set>
+			<map>
+			<chrono>
+			<thread>
+			<filesystem>
+			<functional>
+			<algorithm>
+			<assert.h>
+			)
+
     target_compile_options(${PROJECT_NAME} PRIVATE
         ${DEFAULT_CXX_DEBUG_INFORMATION_FORMAT};
         ${DEFAULT_CXX_EXCEPTION_HANDLING};
+		/std:c++20
     )
 endif()

@@ -8,6 +8,7 @@ https://research.ncl.ac.uk/game/
 */
 #pragma once
 #include "Vector.h"
+#include "headers.h"
 
 namespace NCL {
 	namespace Rendering {

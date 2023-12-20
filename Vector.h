@@ -7,21 +7,31 @@ Comments and queries to: richard-gordon.davison AT ncl.ac.uk
 https://research.ncl.ac.uk/game/
 */
 #pragma once
+
+#ifdef __GNUC__
+#include <cmath>
+#include <cstdint>
+#endif
+
 #include <algorithm>
+
 
 namespace NCL::Maths {
 
     template <typename T, uint32_t n>
-    struct NewVector    {
+    struct NewVector {
         T array[n];
 
         inline T operator[](int i) {
-            return ((T*)this)[i];
+            return ((T *) this)[i];
         }
-
+        
+#ifndef __GNUC__
         inline T& operator[](int i) {
             return ((T*)this)[i];
         }
+#endif
+
     };
 
     using Vector2 = NewVector<float, 2>;

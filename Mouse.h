@@ -9,6 +9,7 @@ https://research.ncl.ac.uk/game/
 #pragma once
 #include "Vector.h"
 #include "Matrix.h"
+#include <cstring>
 
 namespace NCL {
 	using namespace NCL::Maths;

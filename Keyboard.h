@@ -7,6 +7,8 @@ Comments and queries to: richard-gordon.davison AT ncl.ac.uk
 https://research.ncl.ac.uk/game/
 */
 #pragma once
+#include "headers.h"
+#include <cstring>
 
 namespace NCL {
 	//http://msdn.microsoft.com/en-us/library/ms645540(VS.85).aspx
@@ -91,7 +93,7 @@ namespace NCL {
 			X = 0x58,  // X key  
 			Y = 0x59,  // Y key  
 			Z = 0x5A,  // Z key  
-			LWIN = 0x5B,  // Left Windows key (Microsoft® Natural® keyboard)  
+			LWIN = 0x5B,  // Left Windows key (Microsoftï¿½ Naturalï¿½ keyboard)  
 			RWIN = 0x5C,  // Right Windows key (Natural keyboard)  
 			APPS = 0x5D,  //Applications key (Natural keyboard)  
 			SLEEP = 0x5F,  // Computer Sleep key 
