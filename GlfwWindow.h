@@ -6,15 +6,19 @@
 #define NCLCORECLASSES_GLFWWINDOW_H
 
 #include "Window.h"
-#include "glfw/glfw3.h"
+#include "GLFW/glfw3.h"
+#include "GlfwKeyboard.h"
+#include "GlfwMouse.h"
 
 class GlfwWindow : public NCL::Window {
 public:
     GlfwWindow(const std::string& title, int sizeX, int sizeY, bool fullScreen, int offsetX, int offsetY);
-    ~GlfwWindow();
+    ~GlfwWindow() override;
     bool InternalUpdate() override;
 private:
     GLFWwindow* internalWindow;
+    GlfwKeyboard* glfwKeyboard;
+    GlfwMouse* glfwMouse;
 
 };
 

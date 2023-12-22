@@ -1,6 +1,7 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.25)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.21)
 set(PROJECT_NAME NCLCoreClasses)
 project(${PROJECT_NAME})
+set(CMAKE_CXX_STANDARD 20)
 
 ################################################################################
 # Source groups
@@ -100,7 +101,7 @@ set(ALL_FILES
     ${Source_Files}
     ${Windowing_and_Input}
     ${Windowing_and_Input__Win32}
-		GlfwWindow.cpp GlfwWindow.h main.cpp SimpleOGLRenderer.cpp SimpleOGLRenderer.h)
+		GlfwWindow.cpp GlfwWindow.h main.cpp GlfwKeyboard.cpp GlfwKeyboard.h GlfwMouse.cpp GlfwMouse.h)
 
 # GLFW
 

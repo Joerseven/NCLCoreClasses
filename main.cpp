@@ -20,6 +20,11 @@ int main() {
         if (dt > 0.1f) {
             std::cout << "Skipping large delta time" << std::endl;
         }
+        if (Window::GetKeyboard()->KeyPressed(KeyCodes::Q)) {
+            std::cout << "Detecting key press" << std::endl;
+        }
+        std::cout << Window::GetMouse()->GetAbsolutePosition().x
+        << " , "  << Window::GetMouse()->GetAbsolutePosition().y << std::endl;
 
     }
 }

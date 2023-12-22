@@ -19,9 +19,20 @@ GlfwWindow::GlfwWindow(const std::string &title, int sizeX, int sizeY, bool full
         return;
     }
 
+    glfwKeyboard = new GlfwKeyboard(internalWindow);
+    keyboard = glfwKeyboard;
+
+    glfwMouse = new GlfwMouse(internalWindow);
+    mouse = glfwMouse;
+
+
     glfwMakeContextCurrent(internalWindow);
 
     init = true;
+}
+
+GlfwWindow::~GlfwWindow() {
+    glfwTerminate();
 }
 
 bool GlfwWindow::InternalUpdate() {
@@ -31,6 +42,4 @@ bool GlfwWindow::InternalUpdate() {
     return !glfwWindowShouldClose(internalWindow);
 }
 
-GlfwWindow::~GlfwWindow() {
-    glfwTerminate();
-}
+
